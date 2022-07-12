@@ -1,0 +1,48 @@
+#include "ros/ros.h"
+#include "std_msgs/String.h"
+
+/*
+    订阅方实现：
+        1. 包含头文件；
+            ROS 中的文本类型--->stdmsgs/String.h
+        2. 初始化 ROS 节点；
+        3. 初始化节点句柄；
+        4. 创建订阅者对象；
+        5. 处理订阅到的数据；
+        6. spin()函数。
+*/
+
+void doMsg(const std_msgs::String::ConstPtr &msg)
+{
+    //通过msg获取并操作订阅到的数据
+    ROS_INFO("翠花订阅到的数据 %s",msg->data.c_str());
+}
+
+
+int main(int argc, char *argv[])
+{
+    setlocale(LC_ALL,"");
+
+
+    //2. 初始化 ROS 节点；
+    ros::init(argc,argv,"cuiHua");
+
+
+
+    //3. 初始化节点句柄；
+    ros::NodeHandle nh;
+
+
+    //4. 创建订阅者对象；
+    ros::Subscriber sub=nh.subscribe("house",10,doMsg);
+
+
+    //5. 处理订阅到的数据。
+    
+
+
+    ros::spin();
+
+
+    return 0;
+}
