@@ -80,6 +80,28 @@ install/local/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
@@ -113,28 +135,6 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
-
 # The main all target
 all: cmake_check_build_system
 	cd /home/mox/workstation/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/mox/workstation/build/CMakeFiles /home/mox/workstation/build/plumbing_param_server/CMakeFiles/progress.marks
@@ -166,6 +166,21 @@ preinstall/fast:
 depend:
 	cd /home/mox/workstation/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
+
+# Convenience name for target.
+plumbing_param_server/CMakeFiles/demo03_param_del.dir/rule:
+	cd /home/mox/workstation/build && $(MAKE) -f CMakeFiles/Makefile2 plumbing_param_server/CMakeFiles/demo03_param_del.dir/rule
+.PHONY : plumbing_param_server/CMakeFiles/demo03_param_del.dir/rule
+
+# Convenience name for target.
+demo03_param_del: plumbing_param_server/CMakeFiles/demo03_param_del.dir/rule
+
+.PHONY : demo03_param_del
+
+# fast build rule for target.
+demo03_param_del/fast:
+	cd /home/mox/workstation/build && $(MAKE) -f plumbing_param_server/CMakeFiles/demo03_param_del.dir/build.make plumbing_param_server/CMakeFiles/demo03_param_del.dir/build
+.PHONY : demo03_param_del/fast
 
 # Convenience name for target.
 plumbing_param_server/CMakeFiles/demo02_param_get.dir/rule:
@@ -251,6 +266,33 @@ src/demo02_param_get.cpp.s:
 	cd /home/mox/workstation/build && $(MAKE) -f plumbing_param_server/CMakeFiles/demo02_param_get.dir/build.make plumbing_param_server/CMakeFiles/demo02_param_get.dir/src/demo02_param_get.cpp.s
 .PHONY : src/demo02_param_get.cpp.s
 
+src/demo03_param_del.o: src/demo03_param_del.cpp.o
+
+.PHONY : src/demo03_param_del.o
+
+# target to build an object file
+src/demo03_param_del.cpp.o:
+	cd /home/mox/workstation/build && $(MAKE) -f plumbing_param_server/CMakeFiles/demo03_param_del.dir/build.make plumbing_param_server/CMakeFiles/demo03_param_del.dir/src/demo03_param_del.cpp.o
+.PHONY : src/demo03_param_del.cpp.o
+
+src/demo03_param_del.i: src/demo03_param_del.cpp.i
+
+.PHONY : src/demo03_param_del.i
+
+# target to preprocess a source file
+src/demo03_param_del.cpp.i:
+	cd /home/mox/workstation/build && $(MAKE) -f plumbing_param_server/CMakeFiles/demo03_param_del.dir/build.make plumbing_param_server/CMakeFiles/demo03_param_del.dir/src/demo03_param_del.cpp.i
+.PHONY : src/demo03_param_del.cpp.i
+
+src/demo03_param_del.s: src/demo03_param_del.cpp.s
+
+.PHONY : src/demo03_param_del.s
+
+# target to generate assembly for a file
+src/demo03_param_del.cpp.s:
+	cd /home/mox/workstation/build && $(MAKE) -f plumbing_param_server/CMakeFiles/demo03_param_del.dir/build.make plumbing_param_server/CMakeFiles/demo03_param_del.dir/src/demo03_param_del.cpp.s
+.PHONY : src/demo03_param_del.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -259,11 +301,12 @@ help:
 	@echo "... depend"
 	@echo "... install/strip"
 	@echo "... install/local"
+	@echo "... edit_cache"
+	@echo "... test"
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... edit_cache"
-	@echo "... test"
+	@echo "... demo03_param_del"
 	@echo "... demo02_param_get"
 	@echo "... demo01_param_set"
 	@echo "... src/demo01_param_set.o"
@@ -272,6 +315,9 @@ help:
 	@echo "... src/demo02_param_get.o"
 	@echo "... src/demo02_param_get.i"
 	@echo "... src/demo02_param_get.s"
+	@echo "... src/demo03_param_del.o"
+	@echo "... src/demo03_param_del.i"
+	@echo "... src/demo03_param_del.s"
 .PHONY : help
 
 

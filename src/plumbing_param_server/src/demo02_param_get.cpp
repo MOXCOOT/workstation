@@ -55,6 +55,8 @@ int main(int argc, char *argv[])
     ROS_INFO("搜索结果 %s",key.c_str());
 
     
+    //ros::param下的函数同理
+    //ros::param::param();
 
     return 0;
 }

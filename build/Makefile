@@ -493,6 +493,19 @@ rosgraph_msgs_generate_messages_py/fast:
 .PHONY : rosgraph_msgs_generate_messages_py/fast
 
 #=============================================================================
+# Target rules for targets named demo03_param_del
+
+# Build rule for target.
+demo03_param_del: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 demo03_param_del
+.PHONY : demo03_param_del
+
+# fast build rule for target.
+demo03_param_del/fast:
+	$(MAKE) -f plumbing_param_server/CMakeFiles/demo03_param_del.dir/build.make plumbing_param_server/CMakeFiles/demo03_param_del.dir/build
+.PHONY : demo03_param_del/fast
+
+#=============================================================================
 # Target rules for targets named demo02_param_get
 
 # Build rule for target.
@@ -946,6 +959,7 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... rosgraph_msgs_generate_messages_py"
+	@echo "... demo03_param_del"
 	@echo "... demo02_param_get"
 	@echo "... demo01_param_set"
 	@echo "... demo04_sub_person"
